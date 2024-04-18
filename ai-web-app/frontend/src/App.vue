@@ -1,15 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+</script>
 
 <template>
   <app-header></app-header>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
+  <main class="justify-self-start flex">
+    <router-view :key="`${$route.path}${JSON.stringify($route.query)}`" />
+  </main>
+  <footer class="bg-blue-600 p-4 text-white">
+    Made with 💕 by Jeremie, using the tutorial
+    <app-link to="https://www.youtube.com/watch?v=ftKiHCDVwfA">
+      "Learn Python Backend Development" of Tomi
+    </app-link>
+  </footer>
 </template>
 
 <style scoped>

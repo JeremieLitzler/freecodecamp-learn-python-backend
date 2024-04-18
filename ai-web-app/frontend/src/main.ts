@@ -1,8 +1,12 @@
 import { createApp } from 'vue';
+
 import './assets/style.css';
 import App from './App.vue';
+import router from './router';
 
 const app = createApp(App);
+
+app.use(router);
 
 const componentFiles = import.meta.glob('@/components/App*.vue', {
   eager: true,
