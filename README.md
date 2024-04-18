@@ -1,6 +1,6 @@
 # Learn Python Backend Development
 
-## AI Web App
+## Create the frontend
 
 This is based [on this repository](https://github.com/tomitokko/ai-blog-article-generator).
 
@@ -21,32 +21,50 @@ $ npm init vite
 √ Select a variant: » TypeScript
 ```
 
-- Install TailwindCss, PostCss and Autoprefixer:
+### Install and configure Tailwind
+
+Follow the [official guide for Vue applications](https://tailwindcss.com/docs/guides/vite#vue).
+
+### Use this template
+
+I have the following code base with a small router setup: download it [here](https://github.com/JeremieLitzler/freecodecamp-learn-python-backend/tree/boilerplate-frontend-starter).
+
+## Create the backend
+
+### Install python with _Scoop_:
 
 ```bash
-npm i tailwindcss postcss autoprefixer
+# See https://scoop.sh/#/
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+# See https://scoop.sh/#/apps?q=python
+scoop bucket add main
+scoop install main/python
 ```
 
-- Configure Tailwind:
+## Install DJango:
 
-```sh
-npx tailwindcss init -p
+```bash
+py -m pip install Django==5.0.4
 ```
 
-- Update the `tailwind.config.js`:
+If you get
 
-```tsx
-// tailwind.config.js
-import typography from '@tailwindcss/typography';
-import forms from '@tailwindcss/forms';
-import aspectRatio from '@tailwindcss/aspect-ratio';
+```log
+WARNING: The script sqlformat.exe is installed in 'C:\Users\jlitzler\scoop\apps\python\3.12.1\Scripts' which is not on PATH.
+WARNING: The script django-admin.exe is installed in 'C:\Users\jlitzler\scoop\apps\python\3.12.1\Scripts' which is not on PATH.
+```
 
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  theme: {
-    extend: {},
-  },
-  plugins: [typography, forms, aspectRatio],
-};
+You need to add these directory to `PATH` in your environment variables on Windows.
+
+### Create the backend project
+
+```bash
+django-admin startproject backend
+```
+
+If you aren't an admin of your PC, run the following:
+
+```bash
+/c/Users/jlitzler/scoop/apps/python/3.12.1/Scripts/django-admin.exe startproject backend
 ```

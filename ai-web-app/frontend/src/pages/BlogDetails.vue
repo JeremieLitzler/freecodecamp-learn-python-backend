@@ -3,6 +3,8 @@
     <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow-md flex-col">
       <section class="text-left">
         <h1 class="text-2xl font-semibold mb-4">{{ article?.title }}</h1>
+        <app-link :to="article?.ytLink">📺 View video</app-link>
+        <hr class="my-4" />
         <p v-html="article?.html"></p>
       </section>
     </div>
