@@ -43,10 +43,9 @@
 import { computed, ref } from 'vue';
 import type CredentialsData from '@/types/CredentialsData.ts';
 import { useAuth } from '@/composables/useAuth';
-import { useRouter } from 'vue-router';
-import { RouteName } from '@/enums/RouteName';
 
-const router = useRouter();
+const emit = defineEmits(['@handleAuth']);
+
 const form = ref<CredentialsData>({ username: null, password: null });
 const formValid = computed(() => form.value.username && form.value.password);
 /**
@@ -58,9 +57,8 @@ const submit = () => {
     return;
   }
   useAuth().authenticate(form.value);
-  router.push({ name: RouteName.TheHome });
+  emit('@handleAuth');
 };
 </script>
 
 <style scoped></style>
-@/composables/useAuth

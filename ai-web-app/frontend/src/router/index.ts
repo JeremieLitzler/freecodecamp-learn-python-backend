@@ -15,6 +15,21 @@ const HomeRoute: RouteRecordRaw = {
   name: RouteName.TheHome,
   component: TheHome,
 };
+
+const BlogIndexRoute: RouteRecordRaw = {
+  path: RoutePath.BlogIndex,
+  name: RouteName.BlogIndex,
+  component: () => import('@/pages/BlogIndex.vue'),
+  meta: { requestAuth: true },
+};
+const BlogDetailsRoute: RouteRecordRaw = {
+  path: RoutePath.BlogDetails,
+  name: RouteName.BlogDetails,
+  component: () => import('@/pages/BlogDetails.vue'),
+  props: true,
+  meta: { requestAuth: true },
+};
+
 const UserRegisterRoute: RouteRecordRaw = {
   path: RoutePath.UserRegister,
   name: RouteName.UserRegister,
@@ -70,6 +85,8 @@ const routerOptions: RouterOptions = {
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     HomeRoute,
+    BlogIndexRoute,
+    BlogDetailsRoute,
     UserRegisterRoute,
     UserLoginRoute,
     UserLogoutRoute,
@@ -81,5 +98,14 @@ const routerOptions: RouterOptions = {
 
 const router: Router = createRouter(routerOptions);
 
-router.beforeEach(async (_to, _from) => {});
+router.beforeEach(async (to, _from) => {
+  if (to.meta.requestAuth && !useAuth().isLoggedIn.value) {
+    return {
+      name: RouteName.UserLogin,
+      query: { redirectTo: to.fullPath },
+      hash: to.hash,
+    };
+  }
+  //continue since user is authorized
+});
 export default router;

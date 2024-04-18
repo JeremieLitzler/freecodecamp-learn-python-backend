@@ -5,7 +5,7 @@ import { RouterView } from 'vue-router';
 <template>
   <app-header></app-header>
   <main class="justify-self-start flex">
-    <router-view :key="`${$route.path}${JSON.stringify($route.query)}`" />
+    <router-view :key="`${$route.fullPath}`" />
   </main>
   <footer class="bg-blue-600 p-4 text-white">
     Made with 💕 by Jeremie, using the tutorial

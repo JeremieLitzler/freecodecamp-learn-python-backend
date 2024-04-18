@@ -2,7 +2,7 @@ import CredentialsData from '@/types/CredentialsData';
 import { computed, ref } from 'vue';
 
 const LOGGED_IN_KEY = 'loggedIn';
-const state = ref(false);
+const state = ref(localStorage.getItem(LOGGED_IN_KEY) || false);
 export function useAuth() {
   const isLoggedIn = computed(() => state.value);
 
